@@ -35,7 +35,7 @@ const [form, setForm] = useState({
 
 const handleChange =(e) => setForm({...form, [e.target.name]: e.target.value});
 
-const handleRating = (rate) => setForm({...form, rating: rate});
+const handleRating = (x) => setForm({...form, rating: x});
     return (
         <div>
         <button className="btn add-movie" onClick={openModal}>Add Movie</button> 
@@ -60,14 +60,14 @@ const handleRating = (rate) => setForm({...form, rating: rate});
         <label>Date</label>
         <input type="date" value={form.date} name='date' onChange={handleChange} required/>
        
-        <StarRating rate={form.rating} handleRating={handleRating}/>
+        <StarRating stars={form.rating} handleRating={handleRating}/>
        
         <label>Movie Poster</label>
         <input type="url" value={form.image} name='image' onChange={handleChange} required/>
 
         <div>
         <button className="btn btn-primary" type="submit">Add</button>
-        <button className="btn btn-danger" oncklick={closeModal}>Cancel</button> 
+        <button className="btn btn-danger" onClick={closeModal}>Cancel</button> 
         </div>
         
         </form>

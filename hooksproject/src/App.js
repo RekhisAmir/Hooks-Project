@@ -4,6 +4,8 @@ import MovieList from './Movie-app/MovieList';
 import AddMovie from './Movie-app/AddMovie'
 import Search from './Movie-app/Search'
 import {moviesData} from './Movie-app/Data'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Info from './Movie-app/Info';
 
 function App() {
   const [movies, setMovies] = useState(moviesData);
@@ -14,14 +16,25 @@ function App() {
   const handleSearch =(e)=>setSearchValue(e.target.value)
   return (
     <div className="App">
-     <Search searchValue={searchValue}
-            searchRating={searchRating}
-            handleRating={handleRating}
-            handleSearch={handleSearch}/>
-     <MovieList serie={movies.filter(movie=>movie.name.toLowerCase().includes(searchValue.toLowerCase().trim()))} />
-     <AddMovie handleAdd={handleAdd}/>
-     </div>
-  );
-} 
+    <BrowserRouter>
+    <Search searchValue={searchValue}
+    searchRating={searchRating}
+    handleRating={handleRating}
+    handleSearch={handleSearch}/>
 
-export default App;
+    <Switch>
+    <Route exact path='/'  render={()=>
+    
+      <MovieList serie={movies.filter(movie=>movie.name.toLowerCase().includes(searchValue.toLowerCase().trim()))} />
+    }/>
+    <Route exact path='/Info/:name' render={(props)=><Info data={movies} {...props}/>}/>
+    </Switch>
+    <AddMovie handleAdd={handleAdd}/>
+    </BrowserRouter>
+    </div>
+
+    );
+  } 
+  
+  export default App;
+  
